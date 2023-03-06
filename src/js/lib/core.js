@@ -8,6 +8,13 @@ $.prototype.init = function(selector){
     if(!selector){
         return this; // {} пустой об'єкт
     }
+
+    if(selector.tagName){
+        this[0] = selector;
+        this.length = 1;
+        return this;
+    }
+
     Object.assign(this , document.querySelectorAll(selector));
     this.length = document.querySelectorAll(selector).length;
 

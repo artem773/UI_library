@@ -1,28 +1,30 @@
-import $ from '../core';
+import $ from "../core";
 
-$.prototype.addClass = function(...classNames){
+//check !
+
+$.prototype.addAttribute = function(...classNames){
     for (let i = 0; i < this.length; i++){
         if(!this[i].classList){
             continue;
         }
-        this[i].classList.add(...classNames);
+        this[i].setAttribute(...classNames);
     }
 
     return this;
 };
 
-$.prototype.removeClass = function(...classNames){
+$.prototype.removeAttribute = function(...classNames){
     for (let i = 0; i < this.length; i++){
         if(!this[i].classList){
             continue;
         }
-        this[i].classList.remove(...classNames);
+        this[i].removeAttribute(...classNames);
     }
 
     return this;
 };
 
-$.prototype.toggleClass = function(classNames){
+$.prototype.toggleAttribute = function(classNames){
     for (let i = 0; i < this.length; i++){
         if(!this[i].classList){
             continue;
@@ -32,4 +34,3 @@ $.prototype.toggleClass = function(classNames){
 
     return this;
 };
-
