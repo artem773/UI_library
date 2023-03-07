@@ -51,6 +51,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_classes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/classes */ "./src/js/lib/modules/classes.js");
 /* harmony import */ var _modules_handlers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/handlers */ "./src/js/lib/modules/handlers.js");
 /* harmony import */ var _modules_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/actions */ "./src/js/lib/modules/actions.js");
+/* harmony import */ var _modules_animations__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/animations */ "./src/js/lib/modules/animations.js");
+
 
 
 
@@ -168,6 +170,65 @@ $.prototype.siblings = function () {
     delete this[numberOfItems]; //удаляем лішніе елементи что не содержат наш селектор
   }
 
+  return this;
+};
+
+/***/ }),
+
+/***/ "./src/js/lib/modules/animations.js":
+/*!******************************************!*\
+  !*** ./src/js/lib/modules/animations.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core */ "./src/js/lib/core.js");
+
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.animateOverTime = function (duration, callback, final) {
+  //техніческая функція
+  let timeStart;
+  function _animateOverTime(time) {
+    if (!timeStart) {
+      timeStart = time;
+    }
+    let timeElapsed = time - timeStart;
+    let complection = Math.min(timeElapsed / duration, 1); //1 - гранічное значеніе прозрачності 
+
+    callback(complection);
+    if (timeElapsed < duration) {
+      requestAnimationFrame(_animateOverTime);
+    } else {
+      if (typeof final === 'function') {
+        final();
+      }
+    }
+  }
+  return _animateOverTime;
+};
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.fadeIn = function (duration, display, fin) {
+  // fadeIn
+  for (let i = 0; i < this.length; i++) {
+    this[i].style.display = display || 'block';
+    const _fadeIn = complection => {
+      this[i].style.opacity = complection;
+    };
+    const ani = this.animateOverTime(duration, _fadeIn, fin);
+    requestAnimationFrame(ani);
+  }
+  return this;
+};
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.fadeOut = function (duration, fin) {
+  // fadeOut
+  for (let i = 0; i < this.length; i++) {
+    const _fadeOut = complection => {
+      this[i].style.opacity = 1 - complection;
+      if (complection === 1) {
+        this[i].style.display = 'none';
+      }
+    };
+    const ani = this.animateOverTime(duration, _fadeOut, fin);
+    requestAnimationFrame(ani);
+  }
   return this;
 };
 
@@ -373,7 +434,8 @@ __webpack_require__.r(__webpack_exports__);
 // console.log($('.some').closest('.find_mes'));
 
 // console.log($('.more').eq(1).siblings());
-console.log((0,_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('.find_me').siblings());
+// console.log($('.find_me').siblings());
+(0,_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('button').fadeIn(1800);
 })();
 
 /******/ })()
