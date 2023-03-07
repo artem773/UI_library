@@ -130,6 +130,46 @@ $.prototype.find = function (selector) {
 
   return this;
 };
+$.prototype.closest = function (selector) {
+  let counter = 0;
+  for (let i = 0; i < this.length; i++) {
+    this[i] = this[i].closest(selector);
+    counter++;
+  }
+  const objLength = Object.keys(this).length;
+  for (; counter < objLength; counter++) {
+    delete this[counter]; //удаляем лішніе елементи что не содержат наш селектор
+  }
+
+  return this;
+};
+$.prototype.siblings = function () {
+  //получаем все соседніе елементи не включая сам елемент 
+  let numberOfItems = 0; //кол-во найдених елементов по селектору
+  let counter = 0; // номер по порядку
+
+  const copyObj = Object.assign({}, this); //неглубокая компія об'єкта this
+
+  for (let i = 0; i < copyObj.length; i++) {
+    const array = copyObj[i].parentNode.children;
+    for (let j = 0; j < array.length; j++) {
+      if (copyObj[i] === array[j]) {
+        // в новом об'єкте пропускаєм тот елемент над которим ідет действіє і ідем дальше 
+        continue;
+      }
+      this[counter] = array[j];
+      counter++;
+    }
+    numberOfItems += array.length - 1;
+  }
+  this.length = numberOfItems;
+  const objLength = Object.keys(this).length;
+  for (; numberOfItems < objLength; numberOfItems++) {
+    delete this[numberOfItems]; //удаляем лішніе елементи что не содержат наш селектор
+  }
+
+  return this;
+};
 
 /***/ }),
 
@@ -328,7 +368,12 @@ __webpack_require__.r(__webpack_exports__);
 (0,_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('div').click(function () {
   console.log((0,_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])(this).index());
 });
-console.log((0,_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('div').eq(2).find('.some'));
+
+// console.log($('div').eq(2).find('.some'));
+// console.log($('.some').closest('.find_mes'));
+
+// console.log($('.more').eq(1).siblings());
+console.log((0,_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('.find_me').siblings());
 })();
 
 /******/ })()
