@@ -4,5 +4,6 @@ import './modules/classes';
 import './modules/handlers';
 import './modules/actions';
 import './modules/animations';
+import './components/dropdown';
 
 export default $;
