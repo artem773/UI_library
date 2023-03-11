@@ -8,20 +8,29 @@ $.prototype.modal = function(created){
             $(target).fadeIn(500);
             document.body.style.overflow='hidden';
         });
-    }
-    const closeElements = document.querySelectorAll('[data-close]');
-    closeElements.forEach(elem => {
-        $(elem).click(()=>{
-            $('.modal').fadeOut(500);
-            document.body.style.overflow = '';
+
+        const closeElements = document.querySelectorAll(`${target} [data-close]`);
+        closeElements.forEach(elem => {
+            $(elem).click(()=>{
+                $(target).fadeOut(500);
+                document.body.style.overflow = '';
+                if(target){
+                    document.querySelector(target).remove();
+                }
+            });
         });
-    });
-    $('.modal').click(e =>{
-        if(e.target.classList.contains('modal')){
-            $('.modal').fadeOut(500);
-            document.body.style.overflow = '';
-        }
-    });
+
+        $(target).click(e =>{
+            if(e.target.classList.contains('modal')){
+                $(target).fadeOut(500);
+                document.body.style.overflow = '';
+                if(created){
+                    document.querySelector(target).remove();
+                }
+            }   
+        });
+    }
+    
 };
 
 $('[data-toggle="modal"]').modal();

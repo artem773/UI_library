@@ -33,7 +33,7 @@ $('#trigger').click(()=> $('#trigger').createModal({
         body: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Error placeat labore non quos aut consequatur soluta iste exercitationem tempora'
     },
     btns: {
-        count: 2,
+        count: 3,
         settings: [
             [
                 'Close',
@@ -47,6 +47,15 @@ $('#trigger').click(()=> $('#trigger').createModal({
                 ()=>{
                     alert('Data saved :)')
                 }
+            ],
+            [
+                'another button',
+                ['btn-warning', 'ml-10'],
+                false,
+                ()=>{
+                    alert('Hello bro ;)');
+                }
+
             ]
         ]
     }
