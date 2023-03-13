@@ -60,3 +60,5 @@ $('#trigger').click(()=> $('#trigger').createModal({
         ]
     }
 }));
+
+$('.accordion-head').accordion();

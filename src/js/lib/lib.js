@@ -7,5 +7,6 @@ import './modules/animations';
 import './components/dropdown';
 import './components/modal';
 import './components/tab';
+import './components/accordeon';
 
 export default $;
