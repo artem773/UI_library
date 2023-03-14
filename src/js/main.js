@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 import $ from './lib/lib';
-
+/* 
 $('#first').click(()=> {
     $('div').eq(1).fadeToggle(800);
 });
@@ -64,4 +65,6 @@ $('#trigger').click(()=> $('#trigger').createModal({
 $('.accordion-head').accordion();
 
 $().get('https://jsonplaceholder.typicode.com/todos/1')
-    .then(res => console.log(res));
+    .then(res => console.log(res)); 
+    
+*/
